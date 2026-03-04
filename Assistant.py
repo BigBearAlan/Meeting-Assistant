@@ -55,6 +55,7 @@ Tasks:
 1. Identify which readiness signals appear in the answer.
 2. Identify which signals are missing.
 3. Extract supporting evidence from the evidence document that could strengthen the missing signals.
+4. Keep the answer very succinct. Keep only important information.
 
 Return output in this format:
 
