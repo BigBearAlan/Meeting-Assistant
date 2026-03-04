@@ -3,11 +3,41 @@ import pandas as pd
 from datetime import datetime
 import os
 
-st.title("Promotion Readiness Practice")
+# ---------------------------
+# Save responses to CSV
+# ---------------------------
 
+def save_response(data):
+
+    file_path = "responses.csv"
+    df = pd.DataFrame([data])
+
+    if os.path.exists(file_path):
+        df.to_csv(file_path, mode="a", header=False, index=False)
+    else:
+        df.to_csv(file_path, index=False)
+
+
+# ---------------------------
 # Initialize session state
+# ---------------------------
+
 if "step" not in st.session_state:
     st.session_state.step = 1
+
+if "analysis_result" not in st.session_state:
+    st.session_state.analysis_result = None
+
+if "answer" not in st.session_state:
+    st.session_state.answer = None
+
+
+# ---------------------------
+# App Title
+# ---------------------------
+
+st.title("Promotion Readiness Practice")
+
 
 # ---------------------------
 # STEP 1 — Promotion Context
@@ -47,10 +77,7 @@ elif st.session_state.step == 2:
 
     st.write(f"**Question:** {promotion_question}")
 
-    answer = st.text_area(
-        "Your Answer",
-        height=200
-    )
+    answer = st.text_area("Your Answer", height=200)
 
     if st.button("Analyze Response"):
 
@@ -58,9 +85,11 @@ elif st.session_state.step == 2:
             st.warning("Please write your answer first.")
             st.stop()
 
+        st.session_state.answer = answer
+
         with st.spinner("Analyzing..."):
 
-            # MOCK ANALYSIS (no API call)
+            # MOCK ANALYSIS
             result = """
 Covered Signals
 • Influence — mentioned helping teammates and mentoring.
@@ -74,17 +103,48 @@ Evidence you could reference
 • Coordinated cross-team redesign across 3 teams.
 """
 
-        st.subheader("Analysis")
-        st.write(result)
+        st.session_state.analysis_result = result
 
-        feedback = st.radio(
-            "Did this surface something you forgot to mention?",
-            ["Yes", "No"]
-        )
 
-        if feedback:
-            st.success("Thanks for the feedback!")
+# ---------------------------
+# Show Analysis + Feedback
+# ---------------------------
 
-        if st.button("Restart"):
-            st.session_state.step = 1
-            st.rerun()
+if st.session_state.analysis_result:
+
+    st.subheader("Analysis")
+    st.write(st.session_state.analysis_result)
+
+    feedback = st.radio(
+        "Did this surface something you forgot to mention?",
+        ["Yes", "No"],
+        key="feedback_radio"
+    )
+
+    if st.button("Submit Feedback"):
+
+        data = {
+            "timestamp": datetime.now(),
+            "target_role": st.session_state.get("target_role"),
+            "evidence_doc": st.session_state.get("evidence_doc"),
+            "question": "How are you already operating at the next level?",
+            "answer": st.session_state.get("answer"),
+            "analysis": st.session_state.analysis_result,
+            "feedback": feedback
+        }
+
+        save_response(data)
+
+        st.success("Thanks! Your response has been recorded.")
+
+
+# ---------------------------
+# Restart Button
+# ---------------------------
+
+if st.button("Restart Practice"):
+
+    st.session_state.step = 1
+    st.session_state.analysis_result = None
+    st.session_state.answer = None
+    st.rerun()
