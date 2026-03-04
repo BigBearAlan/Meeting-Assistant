@@ -148,3 +148,21 @@ if st.button("Restart Practice"):
     st.session_state.analysis_result = None
     st.session_state.answer = None
     st.rerun()
+
+
+if os.path.exists("responses.csv"):
+    df = pd.read_csv("responses.csv")
+
+    st.subheader("Collected Responses")
+
+    st.dataframe(df)
+
+    csv = df.to_csv(index=False).encode("utf-8")
+
+    st.download_button(
+        "Download Responses CSV",
+        csv,
+        "responses.csv",
+        "text/csv",
+        key="download-csv"
+    )
