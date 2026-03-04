@@ -14,10 +14,10 @@ if st.session_state.step == 1:
 
     st.header("Step 1: Promotion Context")
 
-    target_role = st.text_input("Target Promotion Role")
+    target_role = st.text_input("Target Promotion Role (写下想要target的职位)")
 
     evidence_doc = st.text_area(
-        "Evidence Document (Brag Doc / Promotion Packet / Achievements)",
+        "Evidence Document (Brag Doc / Promotion Packet / Achievements) 写下你的贡献，比如提高30%销售额 etc",
         height=200
     )
 
