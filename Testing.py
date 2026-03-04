@@ -40,7 +40,7 @@ elif st.session_state.step == 2:
 
     st.header("Step 2: Promotion Question")
 
-    promotion_question = "How are you already operating at the next level?"
+    promotion_question = "How are you already operating at the next level? 面试问题：你在哪些方面已经在承担更高一级的职责？- 请模拟面试环境快速回答"
 
     st.write(f"**Question:** {promotion_question}")
 
