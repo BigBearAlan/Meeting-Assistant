@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 import os
-# from openai import OpenAI
+from openai import OpenAI
 import gspread
 from google.oauth2.service_account import Credentials
 
