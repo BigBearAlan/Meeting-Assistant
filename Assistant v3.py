@@ -179,6 +179,17 @@ Evidence the user could add
             )
 
         result = response.choices[0].message.content
+        data = {
+    "timestamp": datetime.now(),
+    "target_role": st.session_state.get("target_role"),
+    "evidence_doc": st.session_state.get("evidence_doc"),
+    "question": promotion_question,
+    "answer": st.session_state.get("answer"),
+    "analysis": result,
+    "feedback": "not_provided"
+}
+
+save_response(data)
         st.session_state.analysis_result = result
 
 # ---------------------------
