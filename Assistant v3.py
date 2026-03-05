@@ -113,14 +113,25 @@ elif st.session_state.step == 2:
         st.session_state.answer = answer
 
         prompt = f"""
-You are evaluating a promotion readiness answer.
+You are an experienced promotion interview coach. Your job is to help users identify **missing signals** in their promotion answer.
+
+Language rule:
+Respond in the **same language used in the user's answer**. 
+If the answer is Chinese, respond in Chinese. 
+If the answer is English, respond in English.
+
+Important rules:
+1. Keep the response concise.
+2. Focus mainly on **missing signals**, not explanations.
+3. Each bullet point should be one short sentence.
+4. Avoid long paragraphs.
 
 Promotion readiness signals:
 
-1. Impact (measurable results)
-2. Scope (ownership of large initiatives)
-3. Influence (leadership, mentoring, driving decisions)
-4. Next-level behavior (already operating at the next level)
+1. Impact — measurable results or business outcomes
+2. Scope — ownership of larger initiatives or broader responsibility
+3. Influence — leading people, coordinating teams, or driving decisions
+4. Next-level behavior — already performing responsibilities expected at the next level
 
 Inputs:
 
@@ -130,7 +141,7 @@ Target Role:
 Promotion Question:
 {promotion_question}
 
-Evidence Document:
+User Evidence Document:
 {st.session_state.evidence_doc}
 
 User Answer:
@@ -138,20 +149,21 @@ User Answer:
 
 Tasks:
 
-1. Identify which readiness signals appear in the answer.
-2. Identify which signals are missing.
-3. Suggest specific evidence from the evidence document that could strengthen the response.
-4. Keep the answer concise and practical.
+Step 1: Identify signals already demonstrated in the answer (maximum 2).
 
-Return output in this format:
+Step 2: Identify the **most important missing signals**.
 
-Covered Signals
+Step 3: Suggest **specific evidence from the evidence document** that the user could add to strengthen the answer.
+
+Output format:
+
+Signals already shown (max 2)
 - ...
 
-Missing Signals
+Missing signals
 - ...
 
-Evidence the user could reference
+Evidence the user could add
 - ...
 """
 
