@@ -125,6 +125,7 @@ Important rules:
 2. Focus mainly on **missing signals**, not explanations.
 3. Each bullet point should be one short sentence.
 4. Avoid long paragraphs.
+5. if the position applying to does not really match the candidate's experience, try to help find angles or suggest what to focus on.
 
 Promotion readiness signals:
 
