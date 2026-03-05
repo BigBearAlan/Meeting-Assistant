@@ -179,17 +179,20 @@ Evidence the user could add
             )
 
         result = response.choices[0].message.content
-        data = {
-    "timestamp": datetime.now(),
-    "target_role": st.session_state.get("target_role"),
-    "evidence_doc": st.session_state.get("evidence_doc"),
-    "question": promotion_question,
-    "answer": st.session_state.get("answer"),
-    "analysis": result,
-    "feedback": "not_provided"
-}
+        
 
-save_response(data)
+        
+        data = {
+            "timestamp": datetime.now(),
+            "target_role": st.session_state.get("target_role"),
+            "evidence_doc": st.session_state.get("evidence_doc"),
+            "question": promotion_question,
+            "answer": st.session_state.get("answer"),
+            "analysis": result,
+            "feedback": "not_provided"
+        }
+
+        save_response(data)
         st.session_state.analysis_result = result
 
 # ---------------------------
@@ -235,23 +238,4 @@ if st.button("Restart Practice"):
     st.session_state.answer = None
     st.rerun()
 
-# ---------------------------
-# Show collected data
-# ---------------------------
 
-if os.path.exists("responses.csv"):
-
-    st.subheader("Collected Responses")
-
-    df = pd.read_csv("responses.csv")
-
-    st.dataframe(df)
-
-    csv = df.to_csv(index=False).encode("utf-8")
-
-    st.download_button(
-        "Download CSV",
-        csv,
-        "responses.csv",
-        "text/csv"
-    )
