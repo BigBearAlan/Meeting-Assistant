@@ -3,6 +3,8 @@ import pandas as pd
 from datetime import datetime
 import os
 # from openai import OpenAI
+import gspread
+from google.oauth2.service_account import Credentials
 
 # ---------------------------
 # Initialize OpenAI Client
@@ -11,18 +13,38 @@ import os
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # ---------------------------
-# Save responses to CSV
+# Google Sheets Setup
+# ---------------------------
+
+scope = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+creds = Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"],
+    scopes=scope
+)
+
+gc = gspread.authorize(creds)
+
+sheet = gc.open("Testing Data").sheet1
+
+# ---------------------------
+# Save responses to Google Sheets
 # ---------------------------
 
 def save_response(data):
 
-    file_path = "responses.csv"
-    df = pd.DataFrame([data])
-
-    if os.path.exists(file_path):
-        df.to_csv(file_path, mode="a", header=False, index=False)
-    else:
-        df.to_csv(file_path, index=False)
+    sheet.append_row([
+        str(data["timestamp"]),
+        data["target_role"],
+        data["evidence_doc"],
+        data["question"],
+        data["answer"],
+        data["analysis"],
+        data["feedback"]
+    ])
 
 # ---------------------------
 # Initialize session state
