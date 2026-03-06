@@ -113,79 +113,93 @@ elif st.session_state.step == 2:
         st.session_state.answer = answer
 
         prompt = f"""
-You are an experienced interview strategist helping candidates strengthen their answers.
+You are an experienced interview strategist helping candidates strengthen their answers in high-stakes interviews.
 
-Your task is to identify what signals the answer sends to interviewers for the Target Role.
+Your goal is to identify what signals the answer sends to interviewers and suggest how the candidate could strengthen it.
 
-Language rule:
-Respond in the same language used in the user's answer.
+Language rule
+Respond in the same language used in the user’s answer.
 
-If the answer is Chinese → respond in Chinese.  
-If the answer is English → respond in English.
-
-Response style:
-• Concise  
-• Bullet points only  
-• One short sentence per bullet  
+Response style
+• Concise
+• Bullet points only
+• One short sentence per bullet
 • Avoid long explanations
 
-Evaluation lenses (not strict rules):
-Promotion panels usually look for signals such as:
-- Impact — measurable results or business outcomes
-- Scope — ownership of larger initiatives or broader responsibility
-- Influence — leading people, aligning stakeholders, driving decisions
-- Next-level behavior — already acting at the next level
-- Strategic thinking — connecting work to larger business goals
-- Ownership — initiating and driving work without being asked
+Important principle
+Different roles are evaluated using different signals.
+Do NOT assume corporate promotion criteria.
 
-Do NOT force all lenses.  
-Focus only on the signals that actually matter for this answer.
+You must first infer what signals matter for the Target Role.
 
-Evaluation signals should adapt to the Target Role.
+Examples of role signals (for reference only):
 
-Do NOT assume corporate promotion signals.
+Corporate roles
+• business impact
+• scope of ownership
+• leadership influence
 
-First infer what signals interviewers for this role would care about.
+Teaching roles
+• student outcomes
+• pedagogy innovation
+• mentoring other teachers
 
-Inputs:
+Performance roles
+• stage presence
+• audience engagement
+• physical stamina
+• consistency of performance
 
-Target Role:
+Inputs
+
+Target Role
 {st.session_state.target_role}
 
-Promotion Question:
+Interview Question
 {promotion_question}
 
-User Evidence Document:
+User Evidence Document
 {st.session_state.evidence_doc}
 
-User Answer:
+User Answer
 {answer}
 
-Tasks:
+Tasks
 
-Step 0 — Check alignment between Target Role and Evidence. - If the evidence comes from a different field,
-suggest ways the candidate could reposition the experience.
-Infer evaluation signals
-Based on the Target Role, list 3–5 signals that interviewers for this role would care about.
+Step 1 — Infer evaluation signals
+Based on the Target Role, list 3–5 signals interviewers would likely evaluate.
 
-Step 1 — Identify the strongest signals already present in the answer (max 3)
+Step 2 — Check role alignment
+Check whether the Evidence Document matches the Target Role.
+If the experience comes from a different field, suggest how it could be repositioned.
 
-Step 2 — Identify the most important missing signals that would make a promotion panel more confident.
+Step 3 — Identify signals already demonstrated in the answer (max 3)
 
-Step 3 — Suggest specific examples or achievements from the evidence document that could strengthen the answer.
+Step 4 — Identify the most important missing signals that would make interviewers more confident.
 
-Focus on practical additions the candidate could say.
+Step 5 — Suggest specific examples from the Evidence Document that could strengthen the answer.
 
-Output format:
+Step 6 — Suggest one stronger line the candidate could add to the answer.
+
+Output format
+
+Role evaluation signals
+	•	…
+
+Role alignment
+	•	…
 
 Signals already shown
-- ...
+	•	…
 
-Missing signals that would strengthen the answer
-- ...
+Missing signals
+	•	…
 
 Evidence the user could add
-- ...
+	•	…
+
+Stronger line the candidate could say
+	•	…
 """
 
         with st.spinner("Analyzing response..."):
