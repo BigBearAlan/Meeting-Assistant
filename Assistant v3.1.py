@@ -8,8 +8,8 @@ st.set_page_config(page_title="Question → Suggestion MVP", layout="wide")
 st.title("Question → Suggestion MVP")
 
 # 1) OpenAI client
-# Set OPENAI_API_KEY in your environment or a .env file
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Set OPENAI_API_KEY in your environment
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # 2) Rule-based question detection
 QUESTION_STARTERS = [
