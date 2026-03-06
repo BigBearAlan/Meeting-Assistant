@@ -3,8 +3,8 @@ import subprocess
 TRANSCRIPT_FILE = "transcript.txt"
 
 cmd = [
-    "../whisper.cpp/build/bin/whisper-cli",
-    "-m", "../whisper.cpp/models/ggml-base.en.bin",
+    "/Users/bearsmacbook16/whisper.cpp/build/bin/whisper-cli",
+    "-m", "/Users/bearsmacbook16/whisper.cpp/models/ggml-base.en.bin",
     "-f", "audio.wav",
     "-nt"
 ]
