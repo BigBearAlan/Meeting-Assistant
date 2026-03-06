@@ -113,26 +113,39 @@ elif st.session_state.step == 2:
         st.session_state.answer = answer
 
         prompt = f"""
-You are an experienced promotion interview coach. Your job is to help users identify **missing signals** in their promotion answer.
+You are an experienced promotion interview strategist helping a candidate strengthen their answer.
+
+Your task is to identify what signals the answer actually sends to a promotion panel and suggest what stronger signals could be added.
 
 Language rule:
-Respond in the **same language used in the user's answer**. 
-If the answer is Chinese, respond in Chinese. 
-If the answer is English, respond in English.
+Respond in the same language used in the user's answer.
 
-Important rules:
-1. Keep the response concise.
-2. Focus mainly on **missing signals**, not explanations.
-3. Each bullet point should be one short sentence.
-4. Avoid long paragraphs.
-5. if the position applying to does not really match the candidate's experience, try to help find angles or suggest what to focus on.
+If the answer is Chinese → respond in Chinese.  
+If the answer is English → respond in English.
 
-Promotion readiness signals:
+Response style:
+• Concise  
+• Bullet points only  
+• One short sentence per bullet  
+• Avoid long explanations
 
-1. Impact — measurable results or business outcomes
-2. Scope — ownership of larger initiatives or broader responsibility
-3. Influence — leading people, coordinating teams, or driving decisions
-4. Next-level behavior — already performing responsibilities expected at the next level
+Evaluation lenses (not strict rules):
+Promotion panels usually look for signals such as:
+- Impact — measurable results or business outcomes
+- Scope — ownership of larger initiatives or broader responsibility
+- Influence — leading people, aligning stakeholders, driving decisions
+- Next-level behavior — already acting at the next level
+- Strategic thinking — connecting work to larger business goals
+- Ownership — initiating and driving work without being asked
+
+Do NOT force all lenses.  
+Focus only on the signals that actually matter for this answer.
+
+Evaluation signals should adapt to the Target Role.
+
+Do NOT assume corporate promotion signals.
+
+First infer what signals interviewers for this role would care about.
 
 Inputs:
 
@@ -150,18 +163,23 @@ User Answer:
 
 Tasks:
 
-Step 1: Identify signals already demonstrated in the answer (maximum 2).
+Step 0 — Check alignment between Target Role and Evidence. - If the evidence comes from a different field,
+suggest ways the candidate could reposition the experience.
 
-Step 2: Identify the **most important missing signals**.
+Step 1 — Identify the strongest signals already present in the answer (max 3)
 
-Step 3: Suggest **specific evidence from the evidence document** that the user could add to strengthen the answer.
+Step 2 — Identify the most important missing signals that would make a promotion panel more confident.
+
+Step 3 — Suggest specific examples or achievements from the evidence document that could strengthen the answer.
+
+Focus on practical additions the candidate could say.
 
 Output format:
 
-Signals already shown (max 2)
+Signals already shown
 - ...
 
-Missing signals
+Missing signals that would strengthen the answer
 - ...
 
 Evidence the user could add
