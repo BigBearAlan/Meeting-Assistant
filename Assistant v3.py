@@ -113,9 +113,9 @@ elif st.session_state.step == 2:
         st.session_state.answer = answer
 
         prompt = f"""
-You are an experienced promotion interview strategist helping a candidate strengthen their answer.
+You are an experienced interview strategist helping candidates strengthen their answers.
 
-Your task is to identify what signals the answer actually sends to a promotion panel and suggest what stronger signals could be added.
+Your task is to identify what signals the answer sends to interviewers for the Target Role.
 
 Language rule:
 Respond in the same language used in the user's answer.
@@ -165,6 +165,8 @@ Tasks:
 
 Step 0 — Check alignment between Target Role and Evidence. - If the evidence comes from a different field,
 suggest ways the candidate could reposition the experience.
+Infer evaluation signals
+Based on the Target Role, list 3–5 signals that interviewers for this role would care about.
 
 Step 1 — Identify the strongest signals already present in the answer (max 3)
 
