@@ -28,6 +28,7 @@ while True:
         "-nt"
     ]
 
+
     result = subprocess.run(cmd, capture_output=True, text=True)
 
     transcript = result.stdout.strip()
